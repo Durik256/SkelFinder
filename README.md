@@ -2,7 +2,7 @@
 Tool for finding skeletons in binary files.<br />
 <img src="help/skelFinderScreen.png" width="256" height="172" />
 
-###ToolStripMenu:<br />
+### ToolStripMenu:<br />
 "File":<br />
 - <sup>Open... >> open any file<br /></sup>
 - <sup>SaveAs SkelFinder >> Save cur skeleton as *.SkelFinder<br /></sup>
