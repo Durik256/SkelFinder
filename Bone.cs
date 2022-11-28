@@ -52,15 +52,15 @@ namespace SkelFinder
             Vector3 pos = new Vector3(matrix.M41, matrix.M42, matrix.M43);
             matrix = _matrix;
             matrix.M41 = pos.X;
-            matrix.M41 = pos.Y;
-            matrix.M41 = pos.Z;
+            matrix.M42 = pos.Y;
+            matrix.M43 = pos.Z;
         }
 
         public void replacePosition(Vector3 pos)
         {
             matrix.M41 = pos.X;
-            matrix.M41 = pos.Y;
-            matrix.M41 = pos.Z;
+            matrix.M42 = pos.Y;
+            matrix.M43 = pos.Z;
         }
     }
 }
