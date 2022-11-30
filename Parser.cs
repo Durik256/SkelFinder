@@ -319,7 +319,7 @@ namespace SkelFinder
                 case "int": return br.ReadInt32();
                 case "int24" : return br.ReadInt24();
                 case "int16" : return br.ReadInt16();
-                case "int8"  : if (br.chekEOF(1)) { return br.ReadSByte(); } else { return 0; };
+                case "int8"  : if (!br.chekEOF(1)) { return br.ReadSByte(); } else { return 0; };
                 case "uint64": return (int)br.ReadUInt64();
                 case "uint32": return (int)br.ReadUInt32();
                 case "uint": return (int)br.ReadUInt32();
@@ -340,8 +340,8 @@ namespace SkelFinder
                 case "half" : return fixFloat(br.ReadHalf());
                 case "int16": return br.ReadInt16() / 32768f;
                 case "short": return br.ReadInt16() / 32768f;
-                case "int8" : if (br.chekEOF(1)) { return br.ReadSByte() / 255f; } else { return 0; };
-                case "byte" : if (br.chekEOF(1)) { return br.ReadSByte() / 255f; } else { return 0; };
+                case "int8" : if (!br.chekEOF(1)) { return br.ReadSByte() / 255f; } else { return 0; };
+                case "byte" : if (!br.chekEOF(1)) { return br.ReadSByte() / 255f; } else { return 0; };
 
                 default: throw new ArgumentException("Unknown value: " + value);
             }
