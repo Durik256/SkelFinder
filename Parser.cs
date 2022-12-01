@@ -232,7 +232,7 @@ namespace SkelFinder
                                 break;
 
                             default:
-                                printDebug("Unknown command: " + cmd[i] + Environment.NewLine);
+                                printDebug("Unknown command: " + cmd[c] + Environment.NewLine);
                                 break;
                         }
                     }
