@@ -666,7 +666,7 @@ namespace SkelFinder
 
         string cmdOffset()
         {
-            return $"seek[{numericOffset.Value}]";
+            return $"offset[{numericOffset.Value}]";
         }
         #endregion
 
