@@ -793,7 +793,7 @@
             this.typeParent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeParent.FormattingEnabled = true;
             this.typeParent.Items.AddRange(new object[] {
-            "ITN32",
+            "INT32",
             "INT24",
             "INT16",
             "INT8",
