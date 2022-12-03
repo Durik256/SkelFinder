@@ -274,7 +274,6 @@
             // 
             // textBoxTemp
             // 
-            this.textBoxTemp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxTemp.Location = new System.Drawing.Point(119, 57);
             this.textBoxTemp.Multiline = true;
             this.textBoxTemp.Name = "textBoxTemp";
