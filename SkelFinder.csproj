@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="Math3D.cs" />
     <Compile Include="Bone.cs" />
+    <Compile Include="myDAE.cs" />
+    <Compile Include="mySMD.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="myBinaryReader.cs" />
     <Compile Include="Form1.cs">
