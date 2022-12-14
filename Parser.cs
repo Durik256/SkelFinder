@@ -11,7 +11,8 @@ namespace SkelFinder
         static Dictionary<string, int> sizeT = new Dictionary<string, int>() { { "byte"   ,1 }, { "int8"  ,1 },
                                                                                { "uint8"  ,1 }, { "int16" ,2 },
                                                                                { "uint16" ,2 }, { "int24" ,3 },
-                                                                               { "uint24" ,3 }, { "int32" ,4 }, { "int" ,4 },
+                                                                               { "uint24" ,3 }, { "int32" ,4 }, 
+                                                                               { "float16",4 }, { "int"   ,4 },
                                                                                { "uint32" ,4 }, { "float" ,4 },
                                                                                { "half"   ,4 }, { "short" ,2 }};
 
@@ -378,6 +379,7 @@ namespace SkelFinder
             {
                 case "float": return fixFloat(br.ReadSingle());
                 case "half" : return fixFloat(br.ReadHalf());
+                case "float16" : return fixFloat(br.ReadHalf());
                 case "int16": return br.ReadInt16() / 32768f;
                 case "short": return br.ReadInt16() / 32768f;
                 case "int8" : return br.ReadSByte() / 255f;
