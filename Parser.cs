@@ -289,7 +289,7 @@ namespace SkelFinder
                 {
                     if (bones[i].Parent != -1 && bones[i].Parent < bones.Length)
                     {
-                        Matrix4x4 invParent = bones[i].Matrix;
+                        Matrix4x4 invParent = bones[bones[i].Parent].Matrix;
                         bones[i].Matrix *= invParent;
                     }
                 }
