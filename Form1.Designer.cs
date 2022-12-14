@@ -1,4 +1,4 @@
-﻿namespace SkelFinder
+namespace SkelFinder
 {
     partial class Form1
     {
@@ -55,6 +55,7 @@
             this.listTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTemptxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveTemptxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveBMPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topicOnForumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMoveSelUp = new System.Windows.Forms.Button();
@@ -103,7 +104,7 @@
             this.tabOffset = new System.Windows.Forms.TabPage();
             this.numericOffset = new System.Windows.Forms.NumericUpDown();
             this.numericDebug = new System.Windows.Forms.NumericUpDown();
-            this.saveBMPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsDAEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pic3D)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBones)).BeginInit();
@@ -302,6 +303,7 @@
             this.openToolStripMenuItem,
             this.saveAsSkelFinderToolStripMenuItem,
             this.saveAsSFasciiToolStripMenuItem,
+            this.saveAsDAEToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
@@ -381,6 +383,13 @@
             this.saveTemptxtToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.saveTemptxtToolStripMenuItem.Text = "save temp.txt";
             this.saveTemptxtToolStripMenuItem.Click += new System.EventHandler(this.saveTemptxtToolStripMenuItem_Click);
+            // 
+            // saveBMPToolStripMenuItem
+            // 
+            this.saveBMPToolStripMenuItem.Name = "saveBMPToolStripMenuItem";
+            this.saveBMPToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.saveBMPToolStripMenuItem.Text = "save BMP";
+            this.saveBMPToolStripMenuItem.Click += new System.EventHandler(this.saveBMPToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -956,12 +965,12 @@
             0});
             this.numericDebug.ValueChanged += new System.EventHandler(this.numericDebug_ValueChanged);
             // 
-            // saveBMPToolStripMenuItem
+            // saveAsDAEToolStripMenuItem
             // 
-            this.saveBMPToolStripMenuItem.Name = "saveBMPToolStripMenuItem";
-            this.saveBMPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.saveBMPToolStripMenuItem.Text = "save BMP";
-            this.saveBMPToolStripMenuItem.Click += new System.EventHandler(this.saveBMPToolStripMenuItem_Click);
+            this.saveAsDAEToolStripMenuItem.Name = "saveAsDAEToolStripMenuItem";
+            this.saveAsDAEToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveAsDAEToolStripMenuItem.Text = "SaveAs DAE";
+            this.saveAsDAEToolStripMenuItem.Click += new System.EventHandler(this.saveAsDAEToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -976,7 +985,6 @@
             this.Controls.Add(this.checkBigE);
             this.Controls.Add(this.btnMoveSelDown);
             this.Controls.Add(this.btnMoveSelUp);
-            this.Controls.Add(this.listBoxTemp);
             this.Controls.Add(this.btnDelSelCMD);
             this.Controls.Add(this.btnClearTemp);
             this.Controls.Add(this.btnPrintParent);
@@ -992,8 +1000,10 @@
             this.Controls.Add(this.btnReadSkel);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.textBoxTemp);
+            this.Controls.Add(this.listBoxTemp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(673, 416);
             this.Name = "Form1";
             this.Text = "SkelFinder (by Durik256)";
             ((System.ComponentModel.ISupportInitialize)(this.pic3D)).EndInit();
@@ -1094,12 +1104,13 @@
         private System.Windows.Forms.CheckBox checkParentZero;
         private System.Windows.Forms.ComboBox typeNameParent;
         private System.Windows.Forms.Button btnReplaceParent;
-        private System.Windows.Forms.ComboBox typeParent;
         private System.Windows.Forms.NumericUpDown numericParent;
         private System.Windows.Forms.ComboBox formatEuler;
         private System.Windows.Forms.CheckBox chekRotation2;
         private System.Windows.Forms.NumericUpDown numericDebug;
         private System.Windows.Forms.ToolStripMenuItem saveBMPToolStripMenuItem;
+        private System.Windows.Forms.ComboBox typeParent;
+        private System.Windows.Forms.ToolStripMenuItem saveAsDAEToolStripMenuItem;
     }
 }
 
