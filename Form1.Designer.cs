@@ -46,8 +46,11 @@ namespace SkelFinder
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsSkelFinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsSFasciiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sFskelFinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sFSFasciiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colladasmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.valvesmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tollsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,7 +107,7 @@ namespace SkelFinder
             this.tabOffset = new System.Windows.Forms.TabPage();
             this.numericOffset = new System.Windows.Forms.NumericUpDown();
             this.numericDebug = new System.Windows.Forms.NumericUpDown();
-            this.saveAsDAEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pic3D)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBones)).BeginInit();
@@ -301,9 +304,7 @@ namespace SkelFinder
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.saveAsSkelFinderToolStripMenuItem,
-            this.saveAsSFasciiToolStripMenuItem,
-            this.saveAsDAEToolStripMenuItem,
+            this.exportToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
@@ -312,28 +313,53 @@ namespace SkelFinder
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // saveAsSkelFinderToolStripMenuItem
+            // exportToolStripMenuItem
             // 
-            this.saveAsSkelFinderToolStripMenuItem.Name = "saveAsSkelFinderToolStripMenuItem";
-            this.saveAsSkelFinderToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
-            this.saveAsSkelFinderToolStripMenuItem.Text = "SaveAs SkelFinder";
-            this.saveAsSkelFinderToolStripMenuItem.Click += new System.EventHandler(this.saveAsSkelFinderToolStripMenuItem_Click);
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sFskelFinderToolStripMenuItem,
+            this.sFSFasciiToolStripMenuItem,
+            this.colladasmdToolStripMenuItem,
+            this.valvesmdToolStripMenuItem});
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exportToolStripMenuItem.Text = "Export";
             // 
-            // saveAsSFasciiToolStripMenuItem
+            // sFskelFinderToolStripMenuItem
             // 
-            this.saveAsSFasciiToolStripMenuItem.Name = "saveAsSFasciiToolStripMenuItem";
-            this.saveAsSFasciiToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
-            this.saveAsSFasciiToolStripMenuItem.Text = "SaveAs SF (ascii)";
-            this.saveAsSFasciiToolStripMenuItem.Click += new System.EventHandler(this.saveAsSFasciiToolStripMenuItem_Click);
+            this.sFskelFinderToolStripMenuItem.Name = "sFskelFinderToolStripMenuItem";
+            this.sFskelFinderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sFskelFinderToolStripMenuItem.Text = "SF (.skelFinder)";
+            this.sFskelFinderToolStripMenuItem.Click += new System.EventHandler(this.sFskelFinderToolStripMenuItem_Click);
+            // 
+            // sFSFasciiToolStripMenuItem
+            // 
+            this.sFSFasciiToolStripMenuItem.Name = "sFSFasciiToolStripMenuItem";
+            this.sFSFasciiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sFSFasciiToolStripMenuItem.Text = "SF (.SFascii)";
+            this.sFSFasciiToolStripMenuItem.Click += new System.EventHandler(this.sFSFasciiToolStripMenuItem_Click);
+            // 
+            // colladasmdToolStripMenuItem
+            // 
+            this.colladasmdToolStripMenuItem.Name = "colladasmdToolStripMenuItem";
+            this.colladasmdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.colladasmdToolStripMenuItem.Text = "Collada (.dae)";
+            this.colladasmdToolStripMenuItem.Click += new System.EventHandler(this.colladasmdToolStripMenuItem_Click);
+            // 
+            // valvesmdToolStripMenuItem
+            // 
+            this.valvesmdToolStripMenuItem.Name = "valvesmdToolStripMenuItem";
+            this.valvesmdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.valvesmdToolStripMenuItem.Text = "Valve (.smd)";
+            this.valvesmdToolStripMenuItem.Click += new System.EventHandler(this.valvesmdToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // tollsToolStripMenuItem
@@ -394,7 +420,8 @@ namespace SkelFinder
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.topicOnForumToolStripMenuItem});
+            this.topicOnForumToolStripMenuItem,
+            this.githubToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
@@ -579,6 +606,11 @@ namespace SkelFinder
             0,
             0,
             0});
+            this.numericName.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericName.Name = "numericName";
             this.numericName.Size = new System.Drawing.Size(83, 22);
             this.numericName.TabIndex = 28;
@@ -821,6 +853,11 @@ namespace SkelFinder
             0,
             0,
             0});
+            this.numericParent.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericParent.Name = "numericParent";
             this.numericParent.Size = new System.Drawing.Size(83, 22);
             this.numericParent.TabIndex = 27;
@@ -965,12 +1002,12 @@ namespace SkelFinder
             0});
             this.numericDebug.ValueChanged += new System.EventHandler(this.numericDebug_ValueChanged);
             // 
-            // saveAsDAEToolStripMenuItem
+            // githubToolStripMenuItem
             // 
-            this.saveAsDAEToolStripMenuItem.Name = "saveAsDAEToolStripMenuItem";
-            this.saveAsDAEToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.saveAsDAEToolStripMenuItem.Text = "SaveAs DAE";
-            this.saveAsDAEToolStripMenuItem.Click += new System.EventHandler(this.saveAsDAEToolStripMenuItem_Click);
+            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
+            this.githubToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.githubToolStripMenuItem.Text = "github";
+            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1066,11 +1103,9 @@ namespace SkelFinder
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsSkelFinderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.ToolStripMenuItem topicOnForumToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsSFasciiToolStripMenuItem;
         private System.Windows.Forms.Button btnAddOffset;
         private System.Windows.Forms.Button btnReplaceOffset;
         private System.Windows.Forms.TabControl tabCMD;
@@ -1110,7 +1145,12 @@ namespace SkelFinder
         private System.Windows.Forms.NumericUpDown numericDebug;
         private System.Windows.Forms.ToolStripMenuItem saveBMPToolStripMenuItem;
         private System.Windows.Forms.ComboBox typeParent;
-        private System.Windows.Forms.ToolStripMenuItem saveAsDAEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sFskelFinderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sFSFasciiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colladasmdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem valvesmdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
     }
 }
 
