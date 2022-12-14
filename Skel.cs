@@ -132,15 +132,30 @@ namespace SkelFinder
 
             for (int i = 0; i < point3D.Length; i++)
             {
-                g.FillRectangle(brush, point3D[i].X - 2.5f, point3D[i].Y - 2.5f, 5, 5);
-                if (printName)
-                    g.DrawString(bones[i].Name, arial, brush, point3D[i]);//render names
+                try
+                {
+                    g.FillRectangle(brush, point3D[i].X - 2.5f, point3D[i].Y - 2.5f, 5, 5);
+                    if (printName)
+                        g.DrawString(bones[i].Name, arial, brush, point3D[i]);//render names
+                }
+                catch
+                {
+                    Console.WriteLine("Error Render Point");
+                }
+
             }
 
             for (int i = 0; i < point3D.Length; i++)
             {
-                if (bones[i].Parent >= 0 && bones[i].Parent < point3D.Length)
+                try
+                {
+                    if (bones[i].Parent >= 0 && bones[i].Parent < point3D.Length)
                     g.DrawLine(redPen, point3D[i], point3D[bones[i].Parent]);
+                }
+                catch
+                {
+                    Console.WriteLine("Error Render Line");
+                }
             }
 
             g.Dispose(); //Clean-up
