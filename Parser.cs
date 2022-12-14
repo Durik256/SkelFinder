@@ -125,7 +125,7 @@ namespace SkelFinder
                                 break;
 
                             case "edeg":
-                                if (chekEOF(fs, 4, arg[0]))
+                                if (chekEOF(fs, 3, arg[0]))
                                     return curBones(i, bones);
 
                                 Vector3 eulerDeg = new Vector3();
