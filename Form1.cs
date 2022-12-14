@@ -592,6 +592,24 @@ namespace SkelFinder
                 }
             }
         }
+        
+        private void saveAsDAEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (bones == null)
+                return;
+
+            saveFileDialog1.Filter = "collada|*.dae";
+            saveFileDialog1.Title = "Save as Collada DAE";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName == "")
+                return;
+
+            using (StreamWriter obj = new StreamWriter(saveFileDialog1.FileName))
+            {
+                myDAE.writeDAE(bones, obj);
+            }
+        }
 
         void saveBMP()
         {
