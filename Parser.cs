@@ -1,13 +1,20 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Windows.Forms;
 
 namespace SkelFinder
 {
     internal static class Parser
     {
+        static Dictionary<string, int> sizeT = new Dictionary<string, int>() { { "byte"   ,1 }, { "int8"  ,1 },
+                                                                               { "uint8"  ,1 }, { "int16" ,2 },
+                                                                               { "uint16" ,2 }, { "int24" ,3 },
+                                                                               { "uint24" ,3 }, { "int32" ,4 }, { "int" ,4 },
+                                                                               { "uint32" ,4 }, { "float" ,4 },
+                                                                               { "half"   ,4 }, { "short" ,2 }};
+
         static public Bone[] ParseTemplate(myBinaryReader br, string template, int numBones, bool multiply)
         {
             if(numBones <= 0)
@@ -38,21 +45,18 @@ namespace SkelFinder
             {
                 string[] cmd = part.Split('\n');//Environment.NewLine
                 
-                if (cmd[0].ToLower().Contains("set"))
-                    fs.Seek(Convert.ToInt64(cmd[0].Split('[', ']')[1]), SeekOrigin.Begin);
+                if (cmd[0].Contains("set"))
+                {
+                    long offset = Convert.ToInt64(cmd[0].Split('[', ']')[1]);
+                    if (chekEOF(fs, offset))
+                        return curBones(0, bones);
+                    
+                    fs.Seek(offset, SeekOrigin.Begin);    
+                }
+                    
 
                 for (int i = 0; i < numBones; i++)
                 {
-                    if (fs.Position >= fs.Length)
-                    {
-                        printDebug("Error EOF!>>>" + Environment.NewLine);
-                        //goto returnBones;
-                        Bone[] curBones = new Bone[i];
-                        for (int b = 0; b < i; b++)
-                            curBones[b] = bones[b];
-                        return curBones;
-                    }
-
                     for (int c = 0; c < cmd.Length; c++)
                     {
                         if (string.IsNullOrEmpty(cmd[c]))
@@ -71,15 +75,24 @@ namespace SkelFinder
 
                                 if (arg.Length > 1)
                                 {
+                                    if (chekEOF(fs, 1, arg[1]))
+                                        return curBones(i, bones);
+
                                     value = ParseInt(br, arg[1]);
                                     if (arg.Length > 2)
                                         value *= Convert.ToInt32(arg[2]);
                                 }
 
+                                if (chekEOF(fs, value))
+                                    return curBones(i, bones);
+
                                 fs.Seek(value, SeekOrigin.Current);
                                 break;
 
                             case "quat":
+                                if (chekEOF(fs, 4, arg[0]))
+                                    return curBones(i, bones);
+
                                 Quaternion localQuat = new Quaternion(ParseFloat(br, arg[0]), ParseFloat(br, arg[0]), ParseFloat(br, arg[0]), ParseFloat(br, arg[0]));
                                 if (arg.Length > 1)
                                 {
@@ -94,22 +107,26 @@ namespace SkelFinder
 
                                 bones[i].replaceRotation(Matrix4x4.CreateFromQuaternion(localQuat));
 
-                                //printDebug($"quad: {localQuat}");
                                 printQuat(localQuat);
                                 break;
 
                             case "erad":
+                                if (chekEOF(fs, 3, arg[0]))
+                                    return curBones(i, bones);
+
                                 Vector3 eulerRad = new Vector3(ParseFloat(br, arg[0]), ParseFloat(br, arg[0]), ParseFloat(br, arg[0]));
                                 if (arg.Length > 1)
                                     eulerRad = transposeVec3(eulerRad, arg[1]);
 
                                 bones[i].replaceRotation(Matrix4x4.CreateFromYawPitchRoll(eulerRad.X, eulerRad.Y, eulerRad.Z));
 
-                                //printDebug($"euler rad: {euler Rad}");
                                 printVec3(eulerRad, "euler rad");
                                 break;
 
                             case "edeg":
+                                if (chekEOF(fs, 4, arg[0]))
+                                    return curBones(i, bones);
+
                                 Vector3 eulerDeg = new Vector3();
 
                                 if (arg[0].Contains("float") || arg[0].Contains("half"))
@@ -120,13 +137,16 @@ namespace SkelFinder
                                 if (arg.Length > 1)
                                     eulerDeg = transposeVec3(eulerDeg, arg[1]);
 
-                                bones[i].replaceRotation(Matrix4x4.CreateFromYawPitchRoll(eulerDeg.X, eulerDeg.Y, eulerDeg.Z));
+                                float r = (float)(Math.PI / 180);
+                                bones[i].replaceRotation(Matrix4x4.CreateFromYawPitchRoll(r * eulerDeg.X, r * eulerDeg.Y, r * eulerDeg.Z));
 
-                                //printDebug($"euler deg: {eulerDeg}");
                                 printVec3(eulerDeg, "euler deg");
                                 break;
 
                             case "mat43":
+                                if (chekEOF(fs, 12, arg[0]))
+                                    return curBones(i, bones);
+
                                 Matrix4x4 localMat43 = new Matrix4x4(
                                     ParseFloat(br, arg[0]),
                                     ParseFloat(br, arg[0]),
@@ -154,11 +174,13 @@ namespace SkelFinder
 
                                 bones[i].Matrix = localMat43;
 
-                                //printDebug($"mat43: {localMat43}");
                                 printMat43(localMat43);
                                 break;
 
                             case "mat44":
+                                if (chekEOF(fs, 16, arg[0]))
+                                    return curBones(i, bones);
+
                                 Matrix4x4 localMat44 = new Matrix4x4(
                                 ParseFloat(br, arg[0]),
                                 ParseFloat(br, arg[0]),
@@ -190,15 +212,16 @@ namespace SkelFinder
 
                                 bones[i].Matrix = localMat44;
 
-                                //printDebug($"mat44: {localMat44}");
                                 printMat44(localMat44);
                                 break;
 
                             case "pos":
+                                if (chekEOF(fs, 3, arg[0]))
+                                    return curBones(i, bones);
+
                                 Vector3 pos = new Vector3(ParseFloat(br, arg[0]), ParseFloat(br, arg[0]), ParseFloat(br, arg[0]));
                                 bones[i].replacePosition(pos);
 
-                                //printDebug($"pos: {pos}");
                                 printVec3(pos);
                                 break;
 
@@ -209,12 +232,19 @@ namespace SkelFinder
 
                                     var arr = arg.Skip(1).ToArray();
                                     string parName = readName(arr, br);
+                                    
+                                    if (parName == null)
+                                        return curBones(i, bones);
+
                                     bones[i].SParent = parName;
 
                                     printDebug($"{i} parent: {parName}" + Environment.NewLine);
                                 }
                                 else
                                 {
+                                    if (chekEOF(fs, 1, arg[0]))
+                                        return curBones(i, bones);
+
                                     strParent = false;
                                     bones[i].Parent = ParseInt(br, arg[0]);
 
@@ -225,6 +255,9 @@ namespace SkelFinder
                             case "name":
                                 string name = readName(arg, br);
 
+                                if (name == null)
+                                    return curBones(i, bones);
+
                                 if (name != null)
                                     bones[i].Name = name;
 
@@ -232,7 +265,7 @@ namespace SkelFinder
                                 break;
 
                             default:
-                                printDebug("Unknown command: " + cmd[c] + Environment.NewLine);
+                                printDebug("Unknown command: " + cmd[i] + Environment.NewLine);
                                 break;
                         }
                     }
@@ -261,7 +294,6 @@ namespace SkelFinder
                 }
             }
 
-            returnBones:
             return bones;
         }
         
@@ -283,6 +315,9 @@ namespace SkelFinder
             int lenght = Convert.ToInt32(arg[0].Trim());
             if (arg.Length > 1)
             {
+                if (chekEOF(br.BaseStream, 1, arg[1]))
+                    return null;
+
                 lenght = ParseInt(br, arg[1]) + 1;
                 if (arg.Length > 2)
                     lenght--;
@@ -291,8 +326,10 @@ namespace SkelFinder
             if (lenght > 999)
                 lenght = 999;
 
-            if (lenght > br.BaseStream.Length - br.BaseStream.Position)
-                lenght = (int)(br.BaseStream.Length - br.BaseStream.Position);
+            if (chekEOF(br.BaseStream, lenght))
+                return null;
+            //if (lenght > br.BaseStream.Length - br.BaseStream.Position)
+            //    lenght = (int)(br.BaseStream.Length - br.BaseStream.Position);
 
             if (lenght > 0)
             {
@@ -304,7 +341,12 @@ namespace SkelFinder
                         name += c;
                 return name;
             }
-            return null;
+            return "";
+        }
+
+        static bool chekEOF(Stream fs, long i, string type = "byte")
+        {
+            return fs.Position + (sizeT[type] * i) > fs.Length;
         }
 
         static int ParseInt(myBinaryReader br, string value)
@@ -314,13 +356,11 @@ namespace SkelFinder
 
             switch (value)
             {
-                case "int64" : return (int)br.ReadInt64();
                 case "int32" : return br.ReadInt32();
                 case "int": return br.ReadInt32();
                 case "int24" : return br.ReadInt24();
                 case "int16" : return br.ReadInt16();
-                case "int8"  : if (!br.chekEOF(1)) { return br.ReadSByte(); } else { return 0; };
-                case "uint64": return (int)br.ReadUInt64();
+                case "int8"  : return br.ReadSByte();
                 case "uint32": return (int)br.ReadUInt32();
                 case "uint": return (int)br.ReadUInt32();
                 case "uint24": return br.ReadUInt24();
@@ -340,8 +380,8 @@ namespace SkelFinder
                 case "half" : return fixFloat(br.ReadHalf());
                 case "int16": return br.ReadInt16() / 32768f;
                 case "short": return br.ReadInt16() / 32768f;
-                case "int8" : if (!br.chekEOF(1)) { return br.ReadSByte() / 255f; } else { return 0; };
-                case "byte" : if (!br.chekEOF(1)) { return br.ReadSByte() / 255f; } else { return 0; };
+                case "int8" : return br.ReadSByte() / 255f;
+                case "byte" : return br.ReadSByte() / 255f;
 
                 default: throw new ArgumentException("Unknown value: " + value);
             }
@@ -438,6 +478,15 @@ namespace SkelFinder
         static void printVec3(Vector3 vec3, string name = "vec3")
         {
             printDebug($"{name}: ({vec3.X},{vec3.Y},{vec3.Z})" + Environment.NewLine);
+        }
+
+        static Bone[] curBones(int i, Bone[] bones)
+        {
+            printDebug("Error EOF!>>>" + Environment.NewLine);
+            Bone[] curBones = new Bone[i];
+            for (int b = 0; b < i; b++)
+                curBones[b] = bones[b];
+            return curBones;
         }
     }
 }
