@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 
@@ -53,8 +53,6 @@ namespace SkelFinder
 
         public short ReadInt16(Endian Endian) => BitConverter.ToInt16(read(sizeof(short), Endian), 0);
 
-        public override byte ReadByte() => read(1, _Endian)[0];
-
         public int ReadInt32(Endian Endian) => BitConverter.ToInt32(read(sizeof(int), Endian), 0);
 
         public long ReadInt64(Endian Endian) => BitConverter.ToInt64(read(sizeof(long), Endian), 0);
@@ -108,25 +106,12 @@ namespace SkelFinder
             return BitConverter.ToSingle(BitConverter.GetBytes(floatNum), 0);
         }
 
-        public bool chekEOF(int i)
-        {
-            return base.BaseStream.Position + i > base.BaseStream.Length;
-        }
-
         private byte[] read(int bytesToRead, Endian Endian)
         {
-            if (chekEOF(bytesToRead))
-            {
-                //Form1.debugBox.Text += ("Error EOF!" + Environment.NewLine);
-                base.BaseStream.Seek(0, SeekOrigin.End);
-                return new byte[] {0,0,0,0};
-            }
             var bytesRead = ReadBytes(bytesToRead);
 
             if (Endian == Endian.Big)
-            {
                 Array.Reverse(bytesRead);
-            }
 
             return bytesRead;
         }
