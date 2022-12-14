@@ -1,13 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static SkelFinder.myBinaryReader;
 
 namespace SkelFinder
@@ -160,7 +162,7 @@ namespace SkelFinder
         {
             if (skel == null)
                 return;
-
+            
             Point point = new Point();
             point.X = e.X;
             point.Y = e.Y;
@@ -477,7 +479,10 @@ namespace SkelFinder
         {
             saveBMP();
         }
-
+        private void githubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/Durik256/SkelFinder");
+        }
         private void topicOnForumToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("https://forum.xentax.com/viewtopic.php?f=16&t=26004");
@@ -495,16 +500,6 @@ namespace SkelFinder
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             openFile();
-        }
-
-        private void saveAsSkelFinderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            WriteSkelFinder();
-        }
-        
-        private void saveAsSFasciiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            WriteSkelFinderASCII();
         }
 
         void openFile()
@@ -592,8 +587,18 @@ namespace SkelFinder
                 }
             }
         }
-        
-        private void saveAsDAEToolStripMenuItem_Click(object sender, EventArgs e)
+        private void sFskelFinderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WriteSkelFinder();
+        }
+
+        private void sFSFasciiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WriteSkelFinderASCII();
+        }
+
+
+        private void colladasmdToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (bones == null)
                 return;
@@ -608,6 +613,24 @@ namespace SkelFinder
             using (StreamWriter obj = new StreamWriter(saveFileDialog1.FileName))
             {
                 myDAE.writeDAE(bones, obj);
+            }
+        }
+
+        private void valvesmdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (bones == null)
+                return;
+
+            saveFileDialog1.Filter = "valve|*.smd";
+            saveFileDialog1.Title = "Save as valve SMD";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName == "")
+                return;
+
+            using (StreamWriter obj = new StreamWriter(saveFileDialog1.FileName))
+            {
+                mySMD.writeSMD(bones, obj);
             }
         }
 
