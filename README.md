@@ -5,8 +5,7 @@ Tool for finding skeletons in binary files.<br />
 ### ToolStripMenu:<br />
 "File":<br />
 - <sup>Open... >> open any file<br /></sup>
-- <sup>SaveAs SkelFinder >> Save cur skeleton as *.SkelFinder<br /></sup>
-- <sup>SaveAs SF (ascii) >> Save cur skeleton as text, *.SFascii<br /></sup>
+- <sup>Export >> Export cur skeleton as *.SkelFinder/.*dae/.*smd<br /></sup>
 - <sup>Exit >> Close Form<br /><br /></sup>
 "Tools":<br />
 - <sup>TextBox >> activate TextBox mode<br /></sup>
