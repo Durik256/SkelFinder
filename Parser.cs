@@ -14,7 +14,7 @@ namespace SkelFinder
                                                                                { "uint24" ,3 }, { "int32" ,4 }, 
                                                                                { "uint"   ,4 }, { "int"   ,4 },
                                                                                { "uint32" ,4 }, { "float" ,4 },
-                                                                               { "half"   ,4 }, { "short" ,2 }};
+                                                                               { "half"   ,2 }, { "short" ,2 }};
 
         static public Bone[] ParseTemplate(myBinaryReader br, string template, int numBones, bool multiply)
         {
