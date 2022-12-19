@@ -49,7 +49,7 @@ namespace SkelFinder
                 if (cmd[0].Contains("set"))
                 {
                     long offset = Convert.ToInt64(cmd[0].Split('[', ']')[1]);
-                    if (chekEOF(fs, offset))
+                    if(offset > fs.Length)
                         return curBones(0, bones);
                     
                     fs.Seek(offset, SeekOrigin.Begin);    
