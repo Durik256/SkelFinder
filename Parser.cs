@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace SkelFinder
 {
@@ -11,7 +12,7 @@ namespace SkelFinder
         static Dictionary<string, int> sizeT = new Dictionary<string, int>() { { "byte"   ,1 }, { "int8"  ,1 },
                                                                                { "uint8"  ,1 }, { "int16" ,2 },
                                                                                { "uint16" ,2 }, { "int24" ,3 },
-                                                                               { "uint24" ,3 }, { "int32" ,4 }, 
+                                                                               { "uint24" ,3 }, { "int32" ,4 },
                                                                                { "uint"   ,4 }, { "int"   ,4 },
                                                                                { "uint32" ,4 }, { "float" ,4 },
                                                                                { "half"   ,2 }, { "short" ,2 }};
@@ -51,7 +52,7 @@ namespace SkelFinder
                     long offset = Convert.ToInt64(cmd[0].Split('[', ']')[1]);
                     if(offset > fs.Length)
                         return curBones(0, bones);
-                    
+
                     fs.Seek(offset, SeekOrigin.Begin);    
                 }
                     
@@ -259,8 +260,7 @@ namespace SkelFinder
                                 if (name == null)
                                     return curBones(i, bones);
 
-                                if (name != null)
-                                    bones[i].Name = name;
+                                bones[i].Name = name;
 
                                 printDebug("name: " + name + Environment.NewLine);
                                 break;
@@ -323,6 +323,26 @@ namespace SkelFinder
                 if (arg.Length > 2)
                     lenght--;
             }
+            else
+            {
+                if(lenght < 0)
+                {
+                    string str = "";
+                    char ch;
+                    while(true)
+                    {
+                        if (chekEOF(br.BaseStream, 1))
+                            return null;
+                        
+                        ch = br.ReadChar();
+                        if ((int)ch == 0)
+                            break;
+                        
+                        str = str + ch;
+                    }
+                    return str;
+                }
+            }
 
             if (lenght > 999)
                 lenght = 999;
@@ -347,7 +367,7 @@ namespace SkelFinder
 
         static bool chekEOF(Stream fs, long i, string type = "byte")
         {
-            return fs.Position + (sizeT[type] * i) > fs.Length;
+            return (fs.Position + (sizeT[type] * i)) > fs.Length;
         }
 
         static int ParseInt(myBinaryReader br, string value)
