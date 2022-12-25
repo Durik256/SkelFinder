@@ -102,7 +102,7 @@ namespace SkelFinder
                                     {
                                         if (arg[j].Contains("norm"))
                                             localQuat = Quaternion.Normalize(localQuat);
-                                        if (arg[j].Contains("inv"))
+                                        if (arg[j].Contains("trans"))
                                             localQuat = Quaternion.Inverse(localQuat);
                                     }
                                 }
