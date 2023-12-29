@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/bin/Debug/SkelFinder.exe.config
+/bin/Debug/SkelFinder.pdb
+/obj

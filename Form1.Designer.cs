@@ -61,6 +61,7 @@ namespace SkelFinder
             this.saveBMPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topicOnForumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMoveSelUp = new System.Windows.Forms.Button();
             this.btnMoveSelDown = new System.Windows.Forms.Button();
             this.checkBigE = new System.Windows.Forms.CheckBox();
@@ -107,7 +108,8 @@ namespace SkelFinder
             this.tabOffset = new System.Windows.Forms.TabPage();
             this.numericOffset = new System.Windows.Forms.NumericUpDown();
             this.numericDebug = new System.Windows.Forms.NumericUpDown();
-            this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxSkipFixed = new System.Windows.Forms.CheckBox();
+            this.textBoxSkipAsName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic3D)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBones)).BeginInit();
@@ -296,7 +298,7 @@ namespace SkelFinder
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(655, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(655, 30);
             this.menuStrip1.TabIndex = 15;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -307,13 +309,13 @@ namespace SkelFinder
             this.exportToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -325,41 +327,41 @@ namespace SkelFinder
             this.colladasmdToolStripMenuItem,
             this.valvesmdToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // sFskelFinderToolStripMenuItem
             // 
             this.sFskelFinderToolStripMenuItem.Name = "sFskelFinderToolStripMenuItem";
-            this.sFskelFinderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sFskelFinderToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.sFskelFinderToolStripMenuItem.Text = "SF (.skelFinder)";
             this.sFskelFinderToolStripMenuItem.Click += new System.EventHandler(this.sFskelFinderToolStripMenuItem_Click);
             // 
             // sFSFasciiToolStripMenuItem
             // 
             this.sFSFasciiToolStripMenuItem.Name = "sFSFasciiToolStripMenuItem";
-            this.sFSFasciiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sFSFasciiToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.sFSFasciiToolStripMenuItem.Text = "SF (.SFascii)";
             this.sFSFasciiToolStripMenuItem.Click += new System.EventHandler(this.sFSFasciiToolStripMenuItem_Click);
             // 
             // colladasmdToolStripMenuItem
             // 
             this.colladasmdToolStripMenuItem.Name = "colladasmdToolStripMenuItem";
-            this.colladasmdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.colladasmdToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.colladasmdToolStripMenuItem.Text = "Collada (.dae)";
             this.colladasmdToolStripMenuItem.Click += new System.EventHandler(this.colladasmdToolStripMenuItem_Click);
             // 
             // valvesmdToolStripMenuItem
             // 
             this.valvesmdToolStripMenuItem.Name = "valvesmdToolStripMenuItem";
-            this.valvesmdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.valvesmdToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.valvesmdToolStripMenuItem.Text = "Valve (.smd)";
             this.valvesmdToolStripMenuItem.Click += new System.EventHandler(this.valvesmdToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // tollsToolStripMenuItem
@@ -372,7 +374,7 @@ namespace SkelFinder
             this.saveTemptxtToolStripMenuItem,
             this.saveBMPToolStripMenuItem});
             this.tollsToolStripMenuItem.Name = "tollsToolStripMenuItem";
-            this.tollsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.tollsToolStripMenuItem.Size = new System.Drawing.Size(58, 26);
             this.tollsToolStripMenuItem.Text = "Tools";
             // 
             // textBoxModeToolStripMenuItem
@@ -423,7 +425,7 @@ namespace SkelFinder
             this.topicOnForumToolStripMenuItem,
             this.githubToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // topicOnForumToolStripMenuItem
@@ -432,6 +434,13 @@ namespace SkelFinder
             this.topicOnForumToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.topicOnForumToolStripMenuItem.Text = "topic on Forum";
             this.topicOnForumToolStripMenuItem.Click += new System.EventHandler(this.topicOnForumToolStripMenuItem_Click);
+            // 
+            // githubToolStripMenuItem
+            // 
+            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
+            this.githubToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.githubToolStripMenuItem.Text = "github";
+            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
             // 
             // btnMoveSelUp
             // 
@@ -847,6 +856,7 @@ namespace SkelFinder
             // 
             // numericParent
             // 
+            this.numericParent.Enabled = false;
             this.numericParent.Location = new System.Drawing.Point(6, 36);
             this.numericParent.Maximum = new decimal(new int[] {
             999,
@@ -865,12 +875,14 @@ namespace SkelFinder
             // tabSeek
             // 
             this.tabSeek.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSeek.Controls.Add(this.textBoxSkipAsName);
+            this.tabSeek.Controls.Add(this.checkBoxSkipFixed);
             this.tabSeek.Controls.Add(this.btnAddSeek);
-            this.tabSeek.Controls.Add(this.numericSeekMul);
             this.tabSeek.Controls.Add(this.checkSeekMul);
             this.tabSeek.Controls.Add(this.btnReplaceSeek);
             this.tabSeek.Controls.Add(this.typeSeek);
             this.tabSeek.Controls.Add(this.numericSeek);
+            this.tabSeek.Controls.Add(this.numericSeekMul);
             this.tabSeek.Location = new System.Drawing.Point(4, 25);
             this.tabSeek.Name = "tabSeek";
             this.tabSeek.Padding = new System.Windows.Forms.Padding(3);
@@ -1002,12 +1014,27 @@ namespace SkelFinder
             0});
             this.numericDebug.ValueChanged += new System.EventHandler(this.numericDebug_ValueChanged);
             // 
-            // githubToolStripMenuItem
+            // checkBoxSkipFixed
             // 
-            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-            this.githubToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.githubToolStripMenuItem.Text = "github";
-            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
+            this.checkBoxSkipFixed.AutoSize = true;
+            this.checkBoxSkipFixed.Enabled = false;
+            this.checkBoxSkipFixed.Location = new System.Drawing.Point(62, 64);
+            this.checkBoxSkipFixed.Name = "checkBoxSkipFixed";
+            this.checkBoxSkipFixed.Size = new System.Drawing.Size(36, 20);
+            this.checkBoxSkipFixed.TabIndex = 31;
+            this.checkBoxSkipFixed.Text = "n";
+            this.checkBoxSkipFixed.UseVisualStyleBackColor = true;
+            this.checkBoxSkipFixed.CheckedChanged += new System.EventHandler(this.checkBoxSkipFixed_CheckedChanged);
+            // 
+            // textBoxSkipAsName
+            // 
+            this.textBoxSkipAsName.Location = new System.Drawing.Point(6, 89);
+            this.textBoxSkipAsName.Name = "textBoxSkipAsName";
+            this.textBoxSkipAsName.ReadOnly = true;
+            this.textBoxSkipAsName.Size = new System.Drawing.Size(83, 22);
+            this.textBoxSkipAsName.TabIndex = 32;
+            this.textBoxSkipAsName.Text = "as \"name\"";
+            this.textBoxSkipAsName.Visible = false;
             // 
             // Form1
             // 
@@ -1151,6 +1178,8 @@ namespace SkelFinder
         private System.Windows.Forms.ToolStripMenuItem colladasmdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem valvesmdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxSkipFixed;
+        private System.Windows.Forms.TextBox textBoxSkipAsName;
     }
 }
 

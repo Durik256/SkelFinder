@@ -694,14 +694,27 @@ namespace SkelFinder
                     return $"parent[0,0,{typeNameParent.Text}" + (!checkParentZero.Checked ? ",false]" : "]");
             }
         }
-
+        string cmdStringSeek()
+        {
+            if (typeName.SelectedIndex == 0)
+                return $"{numericName.Value}";
+            else
+                return $"0;{typeName.Text}" + (!checkNameZero.Checked ? ";false" : "");
+        }
         string cmdSeek()
         {
             if (typeSeek.SelectedIndex == 0)
                 return $"seek[{numericSeek.Value}]";
             else
             {
-                return $"seek[0,{typeSeek.Text}" + (checkSeekMul.Checked ? $",{numericSeekMul.Value}]" : "]");
+                //
+                //return $"seek[0,{typeSeek.Text}" + (checkSeekMul.Checked ? $",{numericSeekMul.Value}]" : "]");
+                if(checkSeekMul.Checked)
+                    return $"seek[0,{typeSeek.Text},{numericSeekMul.Value}]";
+                else if(checkBoxSkipFixed.Checked)
+                    return $"seek[0,{typeSeek.Text},#,{cmdStringSeek()}]";
+                else
+                    return $"seek[0,{typeSeek.Text}]";
             }
         }
 
@@ -820,7 +833,8 @@ namespace SkelFinder
             if (typeNameParent.SelectedIndex != 0)
                 checkParentZero.Enabled = true;
             else
-                numericParent.Enabled = true;
+                if (typeParent.SelectedIndex == 4)
+                    numericParent.Enabled = true;
 
         }
 
@@ -829,19 +843,25 @@ namespace SkelFinder
             checkSeekMul.Enabled = false;
             numericSeekMul.Enabled = false;
 
-            if(typeSeek.SelectedIndex != 0)
+            textBoxSkipAsName.Enabled = false;
+            checkSeekMul.Enabled = false;
+
+            if (typeSeek.SelectedIndex != 0)
             {
                 checkSeekMul.Enabled = true;
-                if(checkSeekMul.Checked)
+                checkBoxSkipFixed.Enabled = true;
+                if (checkSeekMul.Checked)
                     numericSeekMul.Enabled = true;
+                if (checkBoxSkipFixed.Checked)
+                    textBoxSkipAsName.Enabled = true;
+
             }
         }
         
         private void checkSeekMul_CheckedChanged(object sender, EventArgs e)
         {
-            numericSeekMul.Enabled = false;
-            if (checkSeekMul.Checked)
-                numericSeekMul.Enabled = true;
+            numericSeekMul.Enabled = checkSeekMul.Checked;
+            checkBoxSkipFixed.Checked = !checkSeekMul.Checked;
         }
 
         private void btnAddName_Click(object sender, EventArgs e)
@@ -907,6 +927,13 @@ namespace SkelFinder
         private void numericDebug_ValueChanged(object sender, EventArgs e)
         {
             fmt = $"n{numericDebug.Value}";
+        }
+
+        private void checkBoxSkipFixed_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxSkipAsName.Visible = checkBoxSkipFixed.Checked;
+            textBoxSkipAsName.Enabled = checkBoxSkipFixed.Checked;
+            checkSeekMul.Checked = !checkBoxSkipFixed.Checked;
         }
 
         void selectedAll()

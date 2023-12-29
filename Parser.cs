@@ -81,8 +81,18 @@ namespace SkelFinder
                                         return curBones(i, bones);
 
                                     value = ParseInt(br, arg[1]);
-                                    if (arg.Length > 2)
+                                    if (arg.Length > 2 && arg[2] != "#")
                                         value *= Convert.ToInt32(arg[2]);
+                                    else if (arg.Length > 3)
+                                    {
+                                        string[] _arg = arg[3].Trim().Split(';');
+
+                                        for (int j = 0; j < value; j++)
+                                        {
+                                            string skipString = readName(_arg, br);
+                                        }
+                                        value = 0;
+                                    }
                                 }
 
                                 if (chekEOF(fs, value))
@@ -277,9 +287,14 @@ namespace SkelFinder
             {
                 for (int i = 0; i < bones.Length; i++)
                 {
-                    int index = Array.FindIndex(bones, b => b.Name == b.SParent);
-                    if (index != -1)
-                        bones[i].Parent = index;
+                    for (int j = 0; j < bones.Length; j++)
+                    {
+                        if (bones[i].SParent == bones[j].Name)
+                        {
+                            bones[i].Parent = j;
+                            break; // Выход из цикла, после установки Parent
+                        }
+                    }
                 }
             }
 
