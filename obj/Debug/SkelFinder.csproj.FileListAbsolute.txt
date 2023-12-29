@@ -1,0 +1,11 @@
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\bin\Debug\SkelFinder.exe.config
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\bin\Debug\SkelFinder.exe
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\bin\Debug\SkelFinder.pdb
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.csproj.AssemblyReference.cache
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.csproj.SuggestedBindingRedirects.cache
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.Form1.resources
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.Properties.Resources.resources
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.csproj.GenerateResource.cache
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.csproj.CoreCompileInputs.cache
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.exe
+C:\Users\vlad_\Source\Repos\SkelFinder_GIT\obj\Debug\SkelFinder.pdb
