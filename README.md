@@ -34,6 +34,7 @@ Tool for finding skeletons in binary files.<br/>
 <sup>-[DropDown] - to select the mode. (fixed or read the value from file)</sup><br/>
 <sup>-[CheckBox][mul] - multiply the read value by the specified value.</sup><br/>
 <sup>-[NumericUpDown] - the value by which the read value will be multiplied.</sup><br/>
+<sup>-[CheckBox][n] - takes data from the "name" tab, skips n lines (bytes) in a loop.</sup><br/>
 #### offset - the new position in the current stream(begin).divides the template into cycles.<br/><br/>
 FOR ALL CMD: <br/><br/>
 <sup>-[Button][Add] - add current command to template.</sup><br/>
