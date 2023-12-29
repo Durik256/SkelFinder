@@ -844,7 +844,6 @@ namespace SkelFinder
             numericSeekMul.Enabled = false;
 
             textBoxSkipAsName.Enabled = false;
-            checkBoxSkipFixed.Enabled = false;
             checkSeekMul.Enabled = false;
 
             if (typeSeek.SelectedIndex != 0)
@@ -862,10 +861,7 @@ namespace SkelFinder
         private void checkSeekMul_CheckedChanged(object sender, EventArgs e)
         {
             numericSeekMul.Enabled = checkSeekMul.Checked;
-            //checkBoxSkipFixed.Checked = !checkSeekMul.Checked;
-            if (checkSeekMul.Checked)
-                if (checkBoxSkipFixed.Checked)
-                    checkBoxSkipFixed.Checked = false;
+            checkBoxSkipFixed.Checked = !checkSeekMul.Checked;
         }
 
         private void btnAddName_Click(object sender, EventArgs e)
@@ -937,9 +933,7 @@ namespace SkelFinder
         {
             textBoxSkipAsName.Visible = checkBoxSkipFixed.Checked;
             textBoxSkipAsName.Enabled = checkBoxSkipFixed.Checked;
-            if (checkBoxSkipFixed.Checked)
-                if (checkSeekMul.Checked)
-                    checkSeekMul.Checked = false;
+            checkSeekMul.Checked = !checkBoxSkipFixed.Checked;
         }
 
         void selectedAll()
