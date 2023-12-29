@@ -292,7 +292,7 @@ namespace SkelFinder
                         if (bones[i].SParent == bones[j].Name)
                         {
                             bones[i].Parent = j;
-                            break; // Выход из цикла, после установки Parent
+                            break;
                         }
                     }
                 }
