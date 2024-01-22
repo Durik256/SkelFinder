@@ -822,7 +822,8 @@ namespace SkelFinder
             "INT32",
             "INT24",
             "INT16",
-            "INT8"});
+            "INT8",
+            "TO ZERO"});
             this.typeNameParent.Location = new System.Drawing.Point(6, 64);
             this.typeNameParent.Name = "typeNameParent";
             this.typeNameParent.Size = new System.Drawing.Size(83, 24);

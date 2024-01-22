@@ -662,7 +662,7 @@ namespace SkelFinder
             if (typeName.SelectedIndex == 0)
                 return $"name[{numericName.Value}]";
             else if (typeName.SelectedIndex == 5)
-                return $"name[0,#]";//[TO ZERO]
+                return $"name[0,TOZERO]";//[TO ZERO] or #, Z
             else
                 return $"name[0,{typeName.Text}" + (!checkNameZero.Checked ? ",false]" : "]");
         }
@@ -690,18 +690,24 @@ namespace SkelFinder
                 return $"parent[{typeParent.Text}]";
             else// as string
             {
-                if (typeNameParent.SelectedIndex == 0)
+                if (typeNameParent.SelectedIndex == 0)// [FIXED]
                     return $"parent[0,{numericParent.Value}]";
+                else if (typeNameParent.SelectedIndex == 5)// [TO ZERO]
+                    return $"parent[0,TOZERO]"; // or #, Z
                 else
                     return $"parent[0,0,{typeNameParent.Text}" + (!checkParentZero.Checked ? ",false]" : "]");
             }
         }
         string cmdStringSeek()
         {
+            return cmdName().Replace("name[", "").Replace("]", "");
+            /* OLD
             if (typeName.SelectedIndex == 0)
                 return $"{numericName.Value}";
             else
-                return $"0;{typeName.Text}" + (!checkNameZero.Checked ? ";false" : "");
+                return $"0;{typeName.Text.Replace(" ", "")}" + (!checkNameZero.Checked ? ";false" : "");
+            */
+
         }
         string cmdSeek()
         {
@@ -714,7 +720,7 @@ namespace SkelFinder
                 if(checkSeekMul.Checked)
                     return $"seek[0,{typeSeek.Text},{numericSeekMul.Value}]";
                 else if(checkBoxSkipFixed.Checked)
-                    return $"seek[0,{typeSeek.Text},#,{cmdStringSeek()}]";
+                    return $"seek[0,{typeSeek.Text},$,{cmdStringSeek()}]";
                 else
                     return $"seek[0,{typeSeek.Text}]";
             }
@@ -836,11 +842,11 @@ namespace SkelFinder
         {
             numericParent.Enabled = false;
             checkParentZero.Enabled = false;
-            if (typeNameParent.SelectedIndex != 0)
+            if (typeNameParent.SelectedIndex != 0 && typeNameParent.SelectedIndex != 5)//[FIXED] and [TO ZERO]
                 checkParentZero.Enabled = true;
             else
-                if (typeParent.SelectedIndex == 4)
-                    numericParent.Enabled = true;
+                if (typeParent.SelectedIndex == 4 && typeNameParent.SelectedIndex != 5)//type[STRING] and not [TO ZERO]
+                numericParent.Enabled = true;
 
         }
 

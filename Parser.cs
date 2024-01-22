@@ -81,15 +81,16 @@ namespace SkelFinder
                                         return curBones(i, bones);
 
                                     value = ParseInt(br, arg[1]);
-                                    if (arg.Length > 2 && arg[2] != "#")
+                                    if (arg.Length > 2 && (arg[2] != "#" && arg[2] != "$"))// as mul
                                         value *= Convert.ToInt32(arg[2]);
-                                    else if (arg.Length > 3)
+                                    else if (arg.Length > 3 && (arg[2] != "#" || arg[2] != "$"))// as name
                                     {
-                                        string[] _arg = arg[3].Trim().Split(';');
+                                        //string[] _arg = arg[3].Trim().Split(';');
+                                        var arr = arg.Skip(3).ToArray();
 
                                         for (int j = 0; j < value; j++)
                                         {
-                                            string skipString = readName(_arg, br);
+                                            string skipString = readName(arr, br);
                                         }
                                         value = 0;
                                     }
@@ -243,6 +244,10 @@ namespace SkelFinder
                                     strParent = true;
 
                                     var arr = arg.Skip(1).ToArray();
+                                    //temp fix [as STRING TO ZERO]
+                                    if (arr[0] == "#" || arr[0].ToLower() == "z" || arr[0].ToLower() == "tozero")
+                                        arr = new string[] { "0", arr[0] };
+                                    //end temp fix
                                     string parName = readName(arr, br);
                                     
                                     if (parName == null)
