@@ -661,6 +661,8 @@ namespace SkelFinder
         {
             if (typeName.SelectedIndex == 0)
                 return $"name[{numericName.Value}]";
+            else if (typeName.SelectedIndex == 5)
+                return $"name[0,#]";//[TO ZERO]
             else
                 return $"name[0,{typeName.Text}" + (!checkNameZero.Checked ? ",false]" : "]");
         }
@@ -730,10 +732,14 @@ namespace SkelFinder
         {
             checkNameZero.Enabled = false;
             numericName.Enabled = false;
-            if (typeName.SelectedIndex != 0)
+            if (typeName.SelectedIndex != 0 && typeName.SelectedIndex != 5)//[FIXED] and [TO ZERO]
                 checkNameZero.Enabled = true;
             else
                 numericName.Enabled = true;
+
+            //temp fix
+            if (typeName.SelectedIndex == 5)
+                numericName.Enabled = false;
         }
 
         private void formatRotation_SelectedIndexChanged(object sender, EventArgs e)

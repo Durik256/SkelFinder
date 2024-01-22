@@ -325,12 +325,34 @@ namespace SkelFinder
 
             debugBox.Text += s;
         }
-        
+
+        static string ReadStringToZero(myBinaryReader br, int maxChar = 900)
+        {
+            char[] chars = new char[maxChar];
+            for (int i = 0; i < maxChar; i++)
+            {
+                if (br.PeekChar() == -1)
+                    return null;
+
+                char temp = br.ReadChar();
+                if (temp == '\0')
+                    return new string(chars, 0, i);
+
+                chars[i] = temp;
+            }
+
+            return null;
+        }
+
         static string readName(string[] arg, myBinaryReader br)
         {
             int lenght = Convert.ToInt32(arg[0].Trim());
             if (arg.Length > 1)
             {
+                if (!int.TryParse((arg[1]), out _))
+                    if (arg[1] == "#" || arg[1].ToLower() == "z" || arg[1].ToLower() == "tozero")
+                       return ReadStringToZero(br);
+
                 if (chekEOF(br.BaseStream, 1, arg[1]))
                     return null;
 

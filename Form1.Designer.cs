@@ -99,17 +99,17 @@ namespace SkelFinder
             this.typeParent = new System.Windows.Forms.ComboBox();
             this.numericParent = new System.Windows.Forms.NumericUpDown();
             this.tabSeek = new System.Windows.Forms.TabPage();
+            this.textBoxSkipAsName = new System.Windows.Forms.TextBox();
+            this.checkBoxSkipFixed = new System.Windows.Forms.CheckBox();
             this.btnAddSeek = new System.Windows.Forms.Button();
-            this.numericSeekMul = new System.Windows.Forms.NumericUpDown();
             this.checkSeekMul = new System.Windows.Forms.CheckBox();
             this.btnReplaceSeek = new System.Windows.Forms.Button();
             this.typeSeek = new System.Windows.Forms.ComboBox();
             this.numericSeek = new System.Windows.Forms.NumericUpDown();
+            this.numericSeekMul = new System.Windows.Forms.NumericUpDown();
             this.tabOffset = new System.Windows.Forms.TabPage();
             this.numericOffset = new System.Windows.Forms.NumericUpDown();
             this.numericDebug = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxSkipFixed = new System.Windows.Forms.CheckBox();
-            this.textBoxSkipAsName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic3D)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBones)).BeginInit();
@@ -121,8 +121,8 @@ namespace SkelFinder
             this.tabParent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericParent)).BeginInit();
             this.tabSeek.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSeekMul)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSeek)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSeekMul)).BeginInit();
             this.tabOffset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDebug)).BeginInit();
@@ -298,7 +298,7 @@ namespace SkelFinder
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(655, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(655, 28);
             this.menuStrip1.TabIndex = 15;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -309,7 +309,7 @@ namespace SkelFinder
             this.exportToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -374,7 +374,7 @@ namespace SkelFinder
             this.saveTemptxtToolStripMenuItem,
             this.saveBMPToolStripMenuItem});
             this.tollsToolStripMenuItem.Name = "tollsToolStripMenuItem";
-            this.tollsToolStripMenuItem.Size = new System.Drawing.Size(58, 26);
+            this.tollsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.tollsToolStripMenuItem.Text = "Tools";
             // 
             // textBoxModeToolStripMenuItem
@@ -425,7 +425,7 @@ namespace SkelFinder
             this.topicOnForumToolStripMenuItem,
             this.githubToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // topicOnForumToolStripMenuItem
@@ -600,7 +600,8 @@ namespace SkelFinder
             "INT32",
             "INT24",
             "INT16",
-            "INT8"});
+            "INT8",
+            "TO ZERO"});
             this.typeName.Location = new System.Drawing.Point(6, 34);
             this.typeName.Name = "typeName";
             this.typeName.Size = new System.Drawing.Size(83, 24);
@@ -890,6 +891,28 @@ namespace SkelFinder
             this.tabSeek.TabIndex = 3;
             this.tabSeek.Text = "seek";
             // 
+            // textBoxSkipAsName
+            // 
+            this.textBoxSkipAsName.Location = new System.Drawing.Point(6, 89);
+            this.textBoxSkipAsName.Name = "textBoxSkipAsName";
+            this.textBoxSkipAsName.ReadOnly = true;
+            this.textBoxSkipAsName.Size = new System.Drawing.Size(83, 22);
+            this.textBoxSkipAsName.TabIndex = 32;
+            this.textBoxSkipAsName.Text = "as \"name\"";
+            this.textBoxSkipAsName.Visible = false;
+            // 
+            // checkBoxSkipFixed
+            // 
+            this.checkBoxSkipFixed.AutoSize = true;
+            this.checkBoxSkipFixed.Enabled = false;
+            this.checkBoxSkipFixed.Location = new System.Drawing.Point(62, 64);
+            this.checkBoxSkipFixed.Name = "checkBoxSkipFixed";
+            this.checkBoxSkipFixed.Size = new System.Drawing.Size(36, 20);
+            this.checkBoxSkipFixed.TabIndex = 31;
+            this.checkBoxSkipFixed.Text = "n";
+            this.checkBoxSkipFixed.UseVisualStyleBackColor = true;
+            this.checkBoxSkipFixed.CheckedChanged += new System.EventHandler(this.checkBoxSkipFixed_CheckedChanged);
+            // 
             // btnAddSeek
             // 
             this.btnAddSeek.Location = new System.Drawing.Point(6, 118);
@@ -899,23 +922,6 @@ namespace SkelFinder
             this.btnAddSeek.Text = "Add";
             this.btnAddSeek.UseVisualStyleBackColor = true;
             this.btnAddSeek.Click += new System.EventHandler(this.btnAddSeek_Click);
-            // 
-            // numericSeekMul
-            // 
-            this.numericSeekMul.Location = new System.Drawing.Point(6, 90);
-            this.numericSeekMul.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numericSeekMul.Name = "numericSeekMul";
-            this.numericSeekMul.Size = new System.Drawing.Size(83, 22);
-            this.numericSeekMul.TabIndex = 28;
-            this.numericSeekMul.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // checkSeekMul
             // 
@@ -966,6 +972,23 @@ namespace SkelFinder
             this.numericSeek.Size = new System.Drawing.Size(83, 22);
             this.numericSeek.TabIndex = 28;
             // 
+            // numericSeekMul
+            // 
+            this.numericSeekMul.Location = new System.Drawing.Point(6, 90);
+            this.numericSeekMul.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numericSeekMul.Name = "numericSeekMul";
+            this.numericSeekMul.Size = new System.Drawing.Size(83, 22);
+            this.numericSeekMul.TabIndex = 28;
+            this.numericSeekMul.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // tabOffset
             // 
             this.tabOffset.BackColor = System.Drawing.SystemColors.Control;
@@ -1013,28 +1036,6 @@ namespace SkelFinder
             0,
             0});
             this.numericDebug.ValueChanged += new System.EventHandler(this.numericDebug_ValueChanged);
-            // 
-            // checkBoxSkipFixed
-            // 
-            this.checkBoxSkipFixed.AutoSize = true;
-            this.checkBoxSkipFixed.Enabled = false;
-            this.checkBoxSkipFixed.Location = new System.Drawing.Point(62, 64);
-            this.checkBoxSkipFixed.Name = "checkBoxSkipFixed";
-            this.checkBoxSkipFixed.Size = new System.Drawing.Size(36, 20);
-            this.checkBoxSkipFixed.TabIndex = 31;
-            this.checkBoxSkipFixed.Text = "n";
-            this.checkBoxSkipFixed.UseVisualStyleBackColor = true;
-            this.checkBoxSkipFixed.CheckedChanged += new System.EventHandler(this.checkBoxSkipFixed_CheckedChanged);
-            // 
-            // textBoxSkipAsName
-            // 
-            this.textBoxSkipAsName.Location = new System.Drawing.Point(6, 89);
-            this.textBoxSkipAsName.Name = "textBoxSkipAsName";
-            this.textBoxSkipAsName.ReadOnly = true;
-            this.textBoxSkipAsName.Size = new System.Drawing.Size(83, 22);
-            this.textBoxSkipAsName.TabIndex = 32;
-            this.textBoxSkipAsName.Text = "as \"name\"";
-            this.textBoxSkipAsName.Visible = false;
             // 
             // Form1
             // 
@@ -1086,8 +1087,8 @@ namespace SkelFinder
             ((System.ComponentModel.ISupportInitialize)(this.numericParent)).EndInit();
             this.tabSeek.ResumeLayout(false);
             this.tabSeek.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSeekMul)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSeek)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSeekMul)).EndInit();
             this.tabOffset.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDebug)).EndInit();
