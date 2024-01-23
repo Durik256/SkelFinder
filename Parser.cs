@@ -259,11 +259,19 @@ namespace SkelFinder
                                 }
                                 else
                                 {
-                                    if (chekEOF(fs, 1, arg[0]))
+                                    var arr = arg[0].Split(';');
+                                    if (chekEOF(fs, 1, arr[0]))
                                         return curBones(i, bones);
 
                                     strParent = false;
-                                    bones[i].Parent = ParseInt(br, arg[0]);
+                                    bones[i].Parent = ParseInt(br, arr[0]);
+                                    if (arr.Length > 1)
+                                    {
+                                        int result = 0;
+                                        int.TryParse(arr[1], out result);
+                                        bones[i].Parent += result;
+                                    }
+
 
                                     printDebug($"{i} parent: {bones[i].Parent}" + Environment.NewLine);
                                 }

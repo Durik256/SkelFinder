@@ -687,7 +687,10 @@ namespace SkelFinder
         string cmdParent()
         {
             if (typeParent.SelectedIndex != 4)// not string
-                return $"parent[{typeParent.Text}]";
+                if (numericParentAdd.Value == 0)
+                    return $"parent[{typeParent.Text}]";
+                else
+                    return $"parent[{typeParent.Text};{numericParentAdd.Value}]";
             else// as string
             {
                 if (typeNameParent.SelectedIndex == 0)// [FIXED]
@@ -826,15 +829,31 @@ namespace SkelFinder
         private void typeParent_SelectedIndexChanged(object sender, EventArgs e)
         {
             numericParent.Enabled = false;
+            numericParent.Visible = true;
+
             typeNameParent.Enabled = false;
             checkParentZero.Enabled = false;
-            if(typeParent.SelectedIndex == 4)
+            labelParentAdd.Visible = false;
+            numericParentAdd.Visible = false;
+
+            if (typeParent.SelectedIndex == 4)
             {
                 typeNameParent.Enabled = true;
                 if (typeNameParent.SelectedIndex != 0)
+                {
                     checkParentZero.Enabled = true;
+                }
                 else
+                {
                     numericParent.Enabled = true;
+
+                }
+            }
+            else
+            {
+                numericParent.Visible = false;
+                labelParentAdd.Visible = true;
+                numericParentAdd.Visible = true;
             }
         }
         

@@ -110,6 +110,8 @@ namespace SkelFinder
             this.tabOffset = new System.Windows.Forms.TabPage();
             this.numericOffset = new System.Windows.Forms.NumericUpDown();
             this.numericDebug = new System.Windows.Forms.NumericUpDown();
+            this.labelParentAdd = new System.Windows.Forms.Label();
+            this.numericParentAdd = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pic3D)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBones)).BeginInit();
@@ -126,6 +128,7 @@ namespace SkelFinder
             this.tabOffset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDebug)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericParentAdd)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReadSkel
@@ -780,6 +783,8 @@ namespace SkelFinder
             // tabParent
             // 
             this.tabParent.BackColor = System.Drawing.SystemColors.Control;
+            this.tabParent.Controls.Add(this.numericParentAdd);
+            this.tabParent.Controls.Add(this.labelParentAdd);
             this.tabParent.Controls.Add(this.btnAddParent);
             this.tabParent.Controls.Add(this.checkParentZero);
             this.tabParent.Controls.Add(this.typeNameParent);
@@ -1038,6 +1043,32 @@ namespace SkelFinder
             0});
             this.numericDebug.ValueChanged += new System.EventHandler(this.numericDebug_ValueChanged);
             // 
+            // labelParentAdd
+            // 
+            this.labelParentAdd.AutoSize = true;
+            this.labelParentAdd.Location = new System.Drawing.Point(6, 38);
+            this.labelParentAdd.Name = "labelParentAdd";
+            this.labelParentAdd.Size = new System.Drawing.Size(22, 16);
+            this.labelParentAdd.TabIndex = 31;
+            this.labelParentAdd.Text = "+/-";
+            // 
+            // numericParentAdd
+            // 
+            this.numericParentAdd.Location = new System.Drawing.Point(34, 36);
+            this.numericParentAdd.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numericParentAdd.Minimum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            -2147483648});
+            this.numericParentAdd.Name = "numericParentAdd";
+            this.numericParentAdd.Size = new System.Drawing.Size(55, 22);
+            this.numericParentAdd.TabIndex = 32;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1093,6 +1124,7 @@ namespace SkelFinder
             this.tabOffset.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDebug)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericParentAdd)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1182,6 +1214,8 @@ namespace SkelFinder
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxSkipFixed;
         private System.Windows.Forms.TextBox textBoxSkipAsName;
+        private System.Windows.Forms.NumericUpDown numericParentAdd;
+        private System.Windows.Forms.Label labelParentAdd;
     }
 }
 
